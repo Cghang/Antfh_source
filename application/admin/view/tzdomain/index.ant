@@ -1,0 +1,210 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>跳转链接管理</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:url('/Admin/index')}">主页</a>
+            </li>
+            <li>
+                <a>跳转链接管理</a>
+            </li>
+            <li class="active">
+                <strong>链接列表</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+
+<div class="ibox-content m-b-sm border-bottom">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label" for="type">缩址方式</label>
+                <select name="type" id="type" class="form-control">
+                    <option value="0" selected>全部链接</option>
+                    <option value="1">新浪链接</option>
+                    <option value="2">百度链接</option>
+                    <option value="3">搜狗链接</option>
+                    <option value="4">微信链接</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label" for="payStatus">链接状态</label>
+                <select name="status" id="status" class="form-control">
+                    <option value="all">全部状态</option>
+                    <option value="1">正常访问</option>
+                    <option value="0">微信已红</option>
+                    <option value="2">QQ已红</option>
+                    <option value="3">全部已红</option>
+                    <option value="4">其他拦截</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-3">
+
+            <div class="form-group">
+                <label class="font-noraml">开始时间</label>
+                <div class="input-group date form_datetime">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="starttime" name="starttime" value="{$starttime}" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',skin:'default',onpicked:pickedFunc})" class="form-control" >
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+
+            <div class="form-group">
+                <label class="font-noraml">结束时间</label>
+                <div class="input-group date form_datetime">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="endtime" name="endtime"  value="{$endtime}" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',skin:'default',onpicked:pickedFunc2})" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label" for="select_field">查询</label>
+                <select name="select_field" id="select_field" class="form-control">
+                    <option value="title" selected>网站标题</option>
+                    <option value="longurl">长链接</option>
+                    <option value="shorturl">短链接</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label" for="ordVal">输入</label>
+                <input type="text" id="ordVal" placeholder="请输入 ..." name="ordVal" value="" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">操作</label>
+                <a id="btnSearch" class="btn btn-info btn-block">查询链接</a>
+            </div></div>
+
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="table-responsive">
+                <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                    <thead>
+                        <div class="text-left">
+                        <a class="btn btn-sm btn-success" href="{:url('tzdomain/addtzdomain')}">添加域名</a>
+                        <btn class="btn btn-sm btn-warning" id="checkall">检测全部</btn>
+                    </div>
+                        <tr>
+
+                            <th>ID</th>
+                            <th>权重</th>
+                            <th>域名</th>
+                            <th>访问次数</th>
+                            <th>泛解析</th>
+                            <th>微信状态</th>
+                            <th>链接状态</th>
+                            <th>生成时间</th>
+                            <th class="text-right" data-sort-ignore="true">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="view"> </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+                <div id="page"></div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+<script id="tempList" type="text/html">
+
+{{#  layui.each(d.data.data, function(index, v){         }}
+{{#  v.statusName = layui.laytpl.getstatusName(v.status);  }}
+{{#  v.statusFjx = layui.laytpl.getstatusFjx(v.fjx);  }}
+<tr id="tr_{{index}}" class="trindex" data-id="{{v.id}}">
+    <td>{{ v.id }}</td>
+    <td>{{ v.imp || '--' }}</td>
+    <td>{{ v.url || '--' }}</td>
+    <td>{{ v.visit || '--' }}</td>
+    <td>{{ v.statusFjx || '--' }}</td>
+    <td><div class="text-centet"><a onclick="checkstatus({{v.id}})" id="status-{{v.id}}"><i class="fa fa-refresh fa-lg"></i></a> </div> </td>
+    <td>{{ v.statusName || '--' }}</td>
+    <td>{{ v.create_time || '--' }}</td>
+    <td class="text-right">
+        <a class="btn btn-primary btn-dark btn-sm edit" href="{:url('tzdomain/modify')}?id={{ v.id }}" data-index="{{index}}" data-id="{{v.id}}">编辑</a>
+        <button class="btn btn-primary btn-danger btn-sm remove" data-index="{{index}}" data-id="{{v.id}}">删除</button>
+    </td>
+</tr>
+{{#  }); }}
+{{#  if(d.data.data.length === 0){ }}
+<tr>
+    <td colspan="9">&nbsp;</td>
+</tr>
+<tr>
+    <td style="color:blue;" colspan="8" align="center">{{ d.msg }}</td>
+</tr>
+<tr>
+    <td colspan="9">&nbsp;</td>
+</tr>
+{{#  } }}
+</script>
+
+
+<link rel="stylesheet" href="__ADMIN__/layui/css/laypage.css"  media="all">
+<script type="text/javascript" src="__ADMIN__/My97DatePicker/WdatePicker.js"></script>
+<script src="__ADMIN__/layui/layui.js"></script>
+<script src="__ADMIN__/layui/admin.tzdomain.js?t={:time()}{:rand(1,99999)}"></script>
+<script type="text/javascript">
+    function sleep(delay) {
+    var start = (new Date()).getTime();
+    while ((new Date()).getTime() - start < delay) {
+    continue;
+    }
+    }
+    $('#checkall').on('click',function(e){
+    $('#view').find(".trindex").each(function(i,slect_ele){
+   // console.log(slect_ele);
+    console.log($("#tr_" + i).data("id"));
+    checkstatus($("#tr_" + i).data("id"));
+    sleep(500);
+    });
+    });
+    function checkstatus(id){
+    $.ajax({
+    type: 'POST',
+    url: 'doChkurl', // 自定义接收url
+    dataType: 'json',
+    data: {
+    id: id
+    },
+    success: function (data) {
+    if (data.code == 1){
+    layer.msg(data.msg);
+    $('#status-'+id).html("微信正常");
+    }else if(data.code == 0){
+    layer.msg(data.msg);
+    $('#status-'+id).html("微信已红");
+    }else{
+    layer.alert(data.msg);
+    $('#status-'+id).html("系统错误");
+    }
+    },
+    error: function (data) {
+    layer.alert(data.msg);
+    },
+    });
+    }
+    document.title = '{$title} - 蚂蚁防红';
+</script>

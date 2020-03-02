@@ -1,0 +1,59 @@
+<!--Template:蚂蚁防红安卓微信强制跳转-->
+<!--Author Url:www.antfh.net-->
+<!--Preview Url:https://mirrors.mzhipay.com/Antfh/img/antfh/android.wx.jpg-->
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>请使用浏览器打开</title>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="wap-font-scale" content="no">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script type="text/javascript">{$js|raw}</script>
+    <script type="text/javascript" src="__ANT__/js/jump/antfh/qqapi.js"></script>
+    <script type="text/javascript" src="__ANT__/js/jquery.min.js"></script>
+    <script type="text/javascript" src="__ANT__/js/jump/antfh/report.js"></script>
+<style type="text/css">
+@charset "utf-8";html{color:#000;background:#fff;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
+html *{outline:0;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:transparent}
+body,html{font-family:sans-serif}
+a:hover{text-decoration:underline}
+a,ins{text-decoration:none}
+#app,body,html{width:100%;height:100%;margin:0;padding:0}
+.ios-wechat-qq{height:100%;width:100%;position:relative}
+.left-22{width:38%;margin-top:2.32rem;float:left}
+.right-33{width:38%;margin-right:10px;float:right}
+.description-1{font-size:15px;margin-left:5px;margin-top:30%;float:left}
+.description-1 .t-1{color:#757575;letter-spacing:0}
+.description-1 .t-2{color:#0f0f0f;letter-spacing:0}
+.line-1{width:14%;float:right}
+.line-2{top:5.33333rem;width:8%;float:left}
+.description-2{text-align:center;font-size:15px;margin-left:10px;margin-top:10px;float:right}
+.download-area{display:-ms-flexbox;display:flex;-ms-flex-direction:row;width:80%;margin:40% auto auto auto;padding:5%;background:#f9f9f9;border-radius:4px;-ms-flex-align:center;align-items:center}
+.download-area .logo{width:15%;margin-right:5%}
+.download-area .t-1{text-align:left;font-size:14px;color:#fb7299}
+.download-area .t-2{text-align:left;margin-top:.21333rem;font-size:15px;color:#999}
+.download-area .button{font-size:14px;color:#fff;width:5rem;height:1.5rem;line-height:1.5rem;text-align:center;background:#fb7299;border-radius:4px;margin-left:auto}
+</style>
+</head>
+<body>
+   <img src="https://ae01.alicdn.com/kf/H4a9723a4f35a41319791eb4d54dfc14bd.png" width="100%"/>
+<!--   <img src="https://mirrors.mzhipay.com/Antfh/img/antfh/android.wx.jpg" width="100%"/>-->
+   <div style="width:100%;max-width:560px;position:fixed;bottom: 0;font-size: 12px;margin-bottom: 10px;" class="download-area">
+     <img src="https://ae01.alicdn.com/kf/Hd295c7adfcb94bb889816a7795bfad8eR.png" alt="" class="logo">
+<!--     <img src="https://mirrors.mzhipay.com/Antfh/img/antfh/wx.jpg" alt="" class="logo">-->
+   <div>
+              <div class="t-1">安全提示您！该网页安全。</div>
+                <div class="t-2">请按照上图操作，放心浏览！</div>
+            </div>
+            <a id="{$aid}"></a>
+        </div>
+<!--  <script> //取消自动跳转-->
+<!--      var hash = '{$jump.jump_short}';-->
+<!--      if(navigator.userAgent.indexOf("MicroMessenger") > -1){-->
+<!--      window.location.href='/Jump/s/'+hash;-->
+<!--      }-->
+<!--</script>-->
+    <script type="text/javascript" src="__ANT__/js/jump/antfh/openbrowser.js"></script>
+</body></html>

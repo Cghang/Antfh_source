@@ -1,0 +1,29 @@
+<title>账号到期或域名不存在</title>
+
+<style type="text/css">
+<!--
+body,td,th {
+	color: #000;
+}
+body {
+	background-color: #f5f5f5;
+}
+.STYLE7 {
+	font-size: 24px;
+	font-family: "微软雅黑";
+}
+.STYLE9 {font-size: 16px}
+.STYLE12 {
+	font-size: 100px;
+	font-family: "微软雅黑";
+}
+-->
+</style>
+
+<body>
+
+<span class="STYLE12">&nbsp;:(</span>
+<p class="STYLE7"> 　　暂停解析<br />
+    　　信息不存在或会员已过期</p>
+<p class="STYLE7">　　<span class="STYLE9">请联系客服续费后进行访问</span></p>
+</body>

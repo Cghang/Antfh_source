@@ -1,0 +1,174 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>	检测API</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:url('/Admin/index')}">主页</a>
+            </li>
+            <li>网站管理</li>
+            <li class="active">
+                <strong>	API配置</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>API信息 </h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#">无</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">检测接口</label>
+                        <div class="col-sm-10">
+                            <input type="text" disabled="disabled" value="蚂蚁防红 - 官方检测API" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Token</label>
+                        <div class="row">
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="token" id="token" value="{$token}" onkeyup="this.value=this.value.replace(/[^\w]/g,'');" required />
+                            </div>
+                            <div class="col-sm-2">
+                            <span><a  class="btn btn-success"  id="check">检测接口</a> </span>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">API状态</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="status" id="status" value="系统自动获取" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">每日调用次数</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="daily" id="daily" value="系统自动获取" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">API频率限制</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="frequent" id="frequent" value="系统自动获取" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">短网址生成</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="dwz" id="dwz" value="不限制生成[限时]" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-primary" id="update">提交</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+
+        $(document).ready(function () {
+
+        var token = $("#token").val();
+        if(token != ''){
+        $.ajax({
+        type: 'POST',
+        url: '{:config('api_antfh')}/checkStatusToken', // 自定义接收url
+        dataType: 'json',
+        data: {
+        token: $('#token').val()
+        },
+        success: function (data) {
+        if (data.code === 1) {
+        $("#frequent").val(data.data.frequent+' 次/秒');
+        if(data.data.status === 1){ $("#status").val('正常运行');}
+        $("#daily").val(data.data.daily+' 次/天');
+        layer.msg('获取信息成功');
+        }else{
+        layer.msg(data.msg);
+        }
+        },
+        error: function (data) {
+        layer.alert(data.msg);
+        },
+        });
+        }
+        $("#update").click(function () {
+        $.ajax({
+        type: 'POST',
+        url: '{:url('website/doApiset')}', // 自定义接收url
+        dataType: 'json',
+        data: {
+        token: $('#token').val()
+        },
+        success: function (data) {
+        if (data.code === 1) {
+        layer.msg('API信息保存成功');
+        }else{
+        layer.msg(data.msg);
+        }
+        },
+        error: function (data) {
+        layer.alert(data.msg);
+        },
+        });
+        });
+
+
+        $("#check").click(function () {
+        $.ajax({
+        type: 'POST',
+        url: '{:config('api_antfh')}/checkStatusToken', // 自定义接收url
+        dataType: 'json',
+        data: {
+        token: $('#token').val()
+        },
+        success: function (data) {
+        if (data.code === 1) {
+        $("#frequent").val(data.data.frequent+' 次/秒');
+        if(data.data.status === 1){ $("#status").val('正常运行');}
+        $("#daily").val(data.data.daily+' 次/天');
+        layer.msg('获取信息成功');
+        }else{
+        layer.msg(data.msg);
+        }
+        },
+        error: function (data) {
+        layer.alert(data.msg);
+        },
+        });
+        });
+
+        });
+document.title = '{$title} - 蚂蚁防红';
+</script>

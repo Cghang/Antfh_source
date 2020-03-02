@@ -1,0 +1,57 @@
+<html><head>
+    <meta charset="UTF-8">
+    <title>请使用浏览器打开</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta name="format-detection" content="telephone=no">
+    <meta content="false" name="twcClient" id="twcClient">
+    <meta name="aplus-touch" content="1">
+    <style>
+        body,html{width:100%;height:100%}
+        *{margin:0;padding:0}
+        body{background-color:#fff}
+        .top-bar-guidance{font-size:15px;color:#fff;height:85%;line-height:1.8;padding-left:20px;padding-top:20px;background:url(//mirrors.mzhipay.com/Antfh/img/ios_vx_jump.png) center top/contain no-repeat}
+        .app-download-btn{display:block;width:214px;height:40px;line-height:40px;margin:18px auto 0 auto;text-align:center;font-size:18px;color:#2466f4;border-radius:20px;border:.5px #2466f4 solid;text-decoration:none}
+    </style>
+</head>
+    <body>
+        <div class="top-bar-guidance">
+        </div>
+        <a data-clipboard-text="{$jump.longurl}" class="app-download-btn" id="J_BtnDowanloadApp">点此继续访问</a>
+
+        <a style="display: none;" href="" id="vurl" rel="noreferrer"></a>
+
+
+
+        <script src="//cdn.staticfile.org/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+
+            var url = '{$jump.longurl}';
+            var hash = '{$jump.jump_short}';
+
+            function openurl(url) {var a = document.createElement('a');a.setAttribute('href', url);a.setAttribute('style', 'display:none');document.body.appendChild(a);a.click();a.parentNode.removeChild(a);}
+            function ob(u){document.getElementById("vurl").href= u;document.getElementById("vurl").click();}
+
+            document.querySelector('body').addEventListener('touchmove', function (event) {
+            event.preventDefault();
+            });
+            $(document).ready(function(){
+            if(navigator.userAgent.indexOf("QQ/") > -1){
+            ob("mttbrowser://url="+url);
+            $("#J_BtnDowanloadApp").on("click",function(){
+            openurl("mttbrowser://url="+url);
+            //openurl("ucweb://"+url);
+            //openurl("baiduboxapp://browse?url="+url);
+            });
+            }else if(navigator.userAgent.indexOf("MicroMessenger") > -1){
+            if(navigator.userAgent.indexOf("Android") > -1){
+            window.location.href='/Jump/s/'+hash;
+            }
+            }
+            });
+
+        </script>
+        <div style="display:none"></div>
+
+    </body></html>

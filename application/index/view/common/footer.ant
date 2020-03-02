@@ -1,0 +1,53 @@
+
+</section>
+        <!--<div class="notgood">-->
+        <!--<div class="not-bgc"></div>-->
+        <!--<div class="good-box">-->
+        <!--    <h3>公告</h3>-->
+        <!--    <p class="good-content" style="margin: -1px 0 10px;">防红已更新完毕，收藏本站，永久免费。有条件的在网站顶部购买收费版获得最佳体验！</p>-->
+        <!--    <a class="good-btn" href="javascript:;">我知道了</a>-->
+        <!--</div>-->
+        <!--</div>-->
+<footer class="main nousrfoot">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <span style="font-size:12px;">友情链接：<a href="http://www.antfh.net/" target="_blank">蚂蚁防红</a>｜<a href="https://www.5uyun.com/" target="_blank">无忧云</a></span><br>
+                <div class="row">
+                    <div class="col-md-5">
+                        Powered By Antfh CMS © 2019 - 2020
+                    </div>
+                    <div class="col-md-7 text-right">
+                        <a href="https://wpa.qq.com/msgrd?v=3&amp;uin={$qq}&amp;site=qq&amp;menu=yes" title="联系站长" target="_blank">联系站长</a>
+                    </div>
+                </div>
+                <div class="row hidden-xs"><span style="font-size:12px;"></span></div>
+            </div>
+        </div>
+    </div>
+</footer>
+        </body>
+<script>
+$(document).ready(function() {
+//$(".notgood").css("display", "block");
+$(".good-btn").on("click", function() {
+$(".notgood").css("display", "none")
+});
+$('#twr48_5').click(function(){
+$("#twr48").hide();
+});
+});
+
+function In_headerFunction() {
+var element = $("header");
+element.toggleClass("activeheadmenu2");
+}
+
+function In_ShowPosInfo() {
+$(".short-adv-sett").fadeIn(100);
+$(".main-index-top #main-form .main-options").slideDown(100);
+}
+</script>
+<script src="__ANT__/js/layer/layer.js"></script>
+<script type="text/javascript" src="//cdn.staticfile.org/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        </html>

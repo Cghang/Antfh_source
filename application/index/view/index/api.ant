@@ -1,0 +1,151 @@
+{include file="common/header"/}
+
+<section class="under-head-cont" style="margin-top: 0px;
+    padding-bottom: 140px;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;">
+
+    <div class="share-this"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 mb-4">
+                        <div class="list-group list-group-transparent mb-0">
+                            <a class="list-group-item list-group-item-action active" href="{:url('index/api')}">
+                            接入文档
+                        </a> </div>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    接入文档
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-wrap">
+                                    <div class="remark">
+                                        蚂蚁防红支持接口模式，防红短链接生成，请注意提交的API接口。
+                                    </div>
+                                    <h4>
+                                        接口约定
+                                    </h4>
+                                    <p>
+                                        1. 数据编码统一为 utf-8。
+                                    </p>
+                                    <p>
+                                        2. 该文档中提到的 uid token，可在用户中心查看。
+                                    </p>
+                                    <p>
+                                        3. 对于有数据返回的接口，格式为 json，结构如下:
+                                    </p>
+                                    <pre>                      <code class="hljs javascript">
+                                        {
+                                        <span class="hljs-attr">code</span>: xxx,     <span class="hljs-comment">//1 0 为返回接口，999为服务器异常</span>
+                                        msg: {}    <span class="hljs-comment">//当 code=1 or 0 时，msg为接口返回内容。否则为错误信息</span>
+                                        }
+                                    </code>
+                                    </pre>
+                                    <p>
+                                        4. 对于有数据提交的接口，统一用 post/get 的方式（查询接口除外）。数据格式为：
+                                    </p>
+
+                                <h4 class="m-b-20">
+                                    防红短链接生成接口
+                                </h4>
+                                <p>
+                                    接口地址：
+                                </p>
+                                <div class="remark">
+                                    {$Request.scheme}://{$Request.host}/ShortUrl
+                                </div>
+                                <p>
+                                    请求方式：
+                                </p>
+                                <div class="remark">
+                                    post/get
+                                </div>
+                                <p>
+                                    请求参数：
+                                </p>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-border table-vcenter">
+                                        <thead>
+                                            <tr>
+                                                <th style="min-width: 60px">参数名</th>
+                                                <th style="min-width: 120px;">含义</th>
+                                                <th style="min-width: 180px;">验证</th>
+                                                <th style="min-width: 100px">类型</th>
+                                                <th style="min-width: 200px;">说明</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                                <td>
+                                                    longurl
+                                                </td>
+                                                <td>
+                                                    防红网址
+                                                </td>
+                                                <td>
+                                                    必填
+                                                </td>
+                                                <td>
+                                                    var(64)
+                                                </td>
+                                                <td>
+                                                    必须带上协议头，如http:// or https://
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    type
+                                                </td>
+                                                <td>
+                                                    短网址类型
+                                                </td>
+                                                <td>
+                                                    必填
+                                                </td>
+                                                <td>
+                                                    tinyint(2)
+                                                </td>
+                                                <td>
+                                                    短网址类型:1-新浪，2-百度[下线]，3-搜狗，4-微信
+                                                </td>
+                                            </tr>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="alert alert-warning">
+                                用户 token 非常重要，一定不要显示在任何网页代码、网址参数中。只可以放在服务端，以免发生意外的安全风险。
+                            </div>
+
+                            <p>
+                                返回示例：
+                            </p>
+                            <pre>                      <code class="hljs javascript">
+                                {
+                                <span class="hljs-attr">code</span>:  <span class="hljs-number">1</span>,
+                                <span class="hljs-attr">msg</span>: <span class="hljs-string"><span class="hljs-string">"检测域名状态正常"</span></span>
+                                <span class="hljs-attr">anturl</span>: <span class="hljs-string"><span class="hljs-string">"https://w.url.cn/s/AzoQhRp"</span></span>
+                                }
+                            </code>
+                            </pre>
+                            <div class="alert alert-primary">
+                                code 状态 0 为域名被拉黑or其他 1 为生成成功 999 为系统出错 msg 则返回出错信息 anturl 为返回防红链接
+                            </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+        {include file="common/footer"/}

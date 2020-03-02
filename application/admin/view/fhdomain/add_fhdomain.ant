@@ -1,0 +1,116 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>防红链接管理</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:url('/Admin/index')}">主页</a>
+            </li>
+            <li>
+                <a>防红链接管理</a>
+            </li>
+            <li class="active">
+                <strong>链接列表</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label" for="type">缩址方式</label>
+                    <select name="type" id="addtype" class="form-control">
+                        <option value="3">腾讯链接[url.cn]</option>
+                        <option value="4">微信链接[w.url.cn]</option>
+                        <option value="1">新浪链接[t.cn]</option>
+                        <option value="2">百度链接[暂停]</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-9">
+                <label class="control-label" for="type">防红域名</label>
+            <div class="form-group">
+                <input id="url" value="http://" type="text" class="form-control" placeholder="请输入防红域名"/>
+            </div><!-- /input-group -->
+        </div>
+        </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label" for="type">跳转域名</label>
+                        <select name="tzurl" id="tzurl" class="form-control">
+                            <option value="all">随机域名</option>
+                            {foreach $list as $key=>$vo }
+                            <option value="{$vo.id}">{$vo.url}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+        <div class="form-group"><label>网站标题：</label>
+            <input type="text" name="webtitle" id="webtitle" class="form-control" placeholder="输入标题"/>
+            <span><small class="text-mute">Tips：自动获取标题完善中,跳转模式当前作为备注使用</small></span></div>
+    </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label">操作</label>
+                        <a id="urladd" class="btn btn-info btn-block">生成链接</a>
+                    </div></div>
+
+</div>
+
+        <div class="alert alert-success alert-dismissable">
+            该防红链接到期时间默认为一月
+        </div>
+</div>
+</div>
+<script>
+$("#urladd").click(function() {
+var url = $("#url").val(),
+title = $("#webtitle").val(),
+type = $("#addtype").val(),
+tzurl = $("#tzurl").val(),
+t = new Date();
+if (url === '') {
+layer.msg('请输入需要防红的网址URL');
+return false;
+}
+if (title === ''){
+layer.msg('请输入需要防红的网站标题');
+return false;
+}
+var index = layer.load(2, {
+shade: [0.2, '#333'] //0.1透明度的白色背景
+});
+$.ajax({
+url: 'addfhurl',
+type: 'POST',
+dataType: 'json',
+data: {title: title,url: url,type: type, t: t.getTime(), tzurl: tzurl},
+success: function (data) {
+if (data.code === 1) {
+layer.alert('新生成的防红链接为：<a href="' + data.shorturl+'" target="_blank">' + data.anturl + '</a>' +
+'<p class="center-block"><img src="http://api.antfh.net/Qrcode?url='+ data.shorturl +'&title='+ title +'" width="200" height="200"></img></p>');
+layer.close(index);
+$("#title").val('');
+$("#url").val('');
+} else {
+layer.close(index);
+$("#title").val('');
+$("#url").val('');
+layer.alert(data.msg);
+}
+}
+})
+});
+
+document.title = '{$title} - 蚂蚁防红';
+</script>

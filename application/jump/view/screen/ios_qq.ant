@@ -1,0 +1,59 @@
+<title>{$jump.title}</title>
+<meta name="renderer" content="webkit">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+            <style>
+                iframe {
+                width: 1px;
+                min-width: 100%;
+                *width: 100%;
+                }
+                body {
+                margin:0 auto;
+                }
+                .footer{position:fixed;bottom:0;z-index:9999;width:100%;height:50px;background:#323136;line-height:50px;text-align:center;text-decoration:none;}
+                .footer a{background:url(tousu.png) no-repeat 6px;; background-size:30px 20px;color:#fff;display:block;width:100px;margin:0 auto;text-decoration:none;}
+                #erweima{
+                display:none;
+                opacity:0.01;
+                position: absolute;
+                top:0;
+                bottom:0:
+                right:0;
+                left:0;
+                height:1000px;
+                z-index:999;
+                }
+            </style>
+            <body>
+            <iframe frameborder="0" src="{$jump.longurl}" width="100%" height="100%"> </iframe>
+            </body>
+            <img id="erweima"  src="">
+                <script src="__ANT__/js/jquery.min.js"></script>
+                <script>
+
+                    $(function(){
+                    var u = navigator.userAgent;
+                    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+                    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+                    if (isAndroid) {
+                    //$('#erweima').hide()
+                    }else{
+
+                    window.addEventListener('message', function(e) {
+                    var data = e.data
+                    if(typeof data == 'string'){
+                    data = JSON.parse(data)
+                    }
+                    if(data.state=='1'){//显示二维码
+                    $('#erweima').show()
+                    $('#erweima').attr('src',data.url)
+                    }else{
+                    $('#erweima').hide()
+                    }
+                    }, false);
+                    }
+                    })
+                </script>

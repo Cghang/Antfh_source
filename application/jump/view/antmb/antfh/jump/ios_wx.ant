@@ -1,0 +1,61 @@
+<!--Template:蚂蚁防红苹果微信强制跳转-->
+<!--Author Url:www.antfh.net-->
+<!--Preview Url:https://mirrors.mzhipay.com/Antfh/img/antfh/android.wx.jpg-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>请用浏览器打开</title>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="wap-font-scale" content="no"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<script type="text/javascript">{$js|raw}</script>
+  <script type="text/javascript" src="__ANT__/js/jump/antfh/qqapi.js"></script>
+  <script type="text/javascript" src="__ANT__/js/jquery.min.js"></script>
+  <script type="text/javascript" src="__ANT__/js/jump/antfh/report.js"></script>
+  <script src="https://cdn.bootcss.com/iScroll/5.2.0/iscroll.js"></script>
+<style type="text/css">
+  body,div,form,input,li,ol,p,textarea,ul{margin:0;padding:0;font-family: "Microsoft YaHei";color: #fff;}
+  body{background:#fff;color:#3f3f3f;font-family:Apple LiGothic Medium,SimHei,Geneva,Arial,Helvetica,sans-serif;-webkit-tap-highlight-color:transparent;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-appearance:none;width:100%;font-size:12px;}
+  body p {color: white;text-align: center;line-height: 25px;}
+  img{border:0 none}
+  hr{margin: 10px}
+  .fh_jt{width:15rem;height:4.28rem}
+  .fh_jt img{width:15rem;height:4.28rem}
+  .fh_wz{height:6.9rem;line-height:1rem;font-size:.7rem;text-align:center;color:#333}
+  .fh_tp{width:12.44rem;height:10rem;margin:0 auto}
+  .fh_tp img{width:12.44rem;height:10rem;text-align:center}
+  #sff{margin-top: 40px;}
+  #{aid} {position: relative;margin: 0 auto;padding: 6px 15%;color: #fff;border-radius: 3px;border: 1px solid #fff;text-decoration:none;}
+  #{aid}:hover{border: 1px solid #F44336;background: #F44336;}.download-area{display:-ms-flexbox;display:flex;-ms-flex-direction:row;width:80%;margin:40% auto auto auto;padding:5%;background:#f9f9f9;border-radius:4px;-ms-flex-align:center;align-items:center}
+  .download-area .logo{width:15%;margin-right:5%}
+  .download-area .t-1{text-align:left;font-size:14px;color:#fb7299}
+  .download-area .t-2{text-align:left;margin-top:.21333rem;font-size:15px;color:#999}
+  .download-area .button{font-size:14px;color:#fff;width:5rem;height:1.5rem;line-height:1.5rem;text-align:center;background:#fb7299;border-radius:4px;margin-left:auto}
+</style>
+</head>
+<body style="background-color:#383335;text-align: center;">
+<!--  <div id="content-content" style="font-family:微软雅黑;height:260px;text-align:center;padding-top:0px;color:#999;background-color:#ededed;font-size:80%;display:block;">此网页由 www.baidu.com 提供</div>-->
+  <div id="Pan_QQ" style="margin: 0 auto;width: 330px;">
+  <!--自定义修改区-->
+<img src="https://ae01.alicdn.com/kf/Hc09ad1421359458fb0b8409204c974a9D.png" width="100%"/>
+<!--<img src="https://mirrors.mzhipay.com/Antfh/img/antfh/ios_wx.jpg" width="100%"/>-->
+  <!--自定义修改区-->
+</div><div style="width:100%;max-width:560px;position:fixed;bottom: 0;font-size: 12px;margin-bottom: 10px;" class="download-area">
+  <img src="https://ae01.alicdn.com/kf/Hd2c5392e9b0c425c87f76140ccbdfdc8N.png" alt="" class="logo">
+<!--  <img src="https://mirrors.mzhipay.com/Antfh/img/antfh/wx.jpg" alt="" class="logo">-->
+  <div>
+    <div class="t-1">安全提示您！该网页安全。</div>
+    <div class="t-2">请按照上图操作，放心浏览！</div>
+  </div>
+  <a id="{$aid}"></a>
+</div>
+<div id="Pan_WX" style="display: none;">
+ <img src="https://ae01.alicdn.com/kf/Hb1f872f732f640f59bdb05f2c30427f4u.png" width="100%"/>
+<!-- <img src="https://mirrors.mzhipay.com/Antfh/img/antfh/ios_wx.jpg" width="100%"/>-->
+</div>
+  <script type="text/javascript" src="__ANT__/js/jump/antfh/openbrowser.js"></script>
+</body>
+</html>

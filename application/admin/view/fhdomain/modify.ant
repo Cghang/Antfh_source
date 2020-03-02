@@ -1,0 +1,169 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>防红链接管理</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:url('/Admin/index')}">主页</a>
+            </li>
+            <li>
+                <a href="{:url('fhdomain/index')}">防红链接管理</a>
+            </li>
+            <li class="active">
+                <strong>链接列表</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div><div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>链接信息 </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">无</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <input type="hidden" id="id" value="{$domain.id}">
+                            <label class="col-sm-2 control-label">链接标题:</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" id="title" value="{$domain.title}{empty name="domain.title"}等待系统自动获取{/empty}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">链接长地址:</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" id="longurl" value="{$domain.longurl}" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">防封链接</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="shorturl" value="{$domain.shorturl}" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">短网址类型</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" value="{$domain.type|urltype}" disabled=""/>
+                                <input type="hidden" id="uptype" class="form-control" value="{$domain.type}"/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">链接生成时间:</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" placeholder="" value="{$domain.create_time}" class="form-control" disabled>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">到期时间:</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" id="out_time" value="{$domain.out_time|date="Y-m-d H:i:s"}" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" id="update">更新链接</button>
+                                <button class="btn btn-danger" id="urlupdate">重新生成</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$("#update").click(function () {
+$.ajax({
+type: 'POST',
+url: '{:url('fhdomain/doModify')}', // 自定义接收url
+dataType: 'json',
+data: {
+title: $('#title').val(),
+longurl: $('#longurl').val(),
+shorturl: $('#shorturl').val(),
+out_time: $('#out_time').val(),
+uid: $('#uid').val(),
+id: $('#id').val()
+},
+success: function (data) {
+if (data.code === 1) {
+layer.msg('信息保存成功');
+}else{
+layer.msg(data.msg);
+}
+},
+error: function (data) {
+layer.alert(data.msg);
+},
+});
+});
+
+$("#urlupdate").click(function() {
+var longurl = $("#longurl").val(),
+title = $("#title").val(),
+type = $("#uptype").val(),
+id = $('#id').val();
+if (longurl === '') {
+layer.msg('请输入需要防红的网址URL');
+return false;
+}
+if (title === ''){
+layer.msg('请输入需要防红的网站标题');
+return false;
+}
+var index = layer.load(2, {
+shade: [0.2, '#333'] //0.1透明度的白色背景
+});
+$.ajax({
+url: 'upfhurl',
+type: 'POST',
+dataType: 'json',
+data: {title: title,longurl: longurl,type: type, id: id},
+success: function (data) {
+if (data.code === 1) {
+layer.alert('重新生成的防红链接为：<a href="' + data.shorturl+'" target="_blank">' + data.shorturl + '</a>' +
+'<p class="center-block"><img src="http://api.antfh.net/Qrcode?url='+ data.shorturl +'&title='+ title +'" width="200" height="200"></img></p>');
+layer.close(index);
+$("#shorturl").val(data.shorturl);
+} else {
+layer.close(index);
+layer.alert(data.msg);
+}
+}
+})
+});
+
+document.title = '{$title} - 蚂蚁防红';
+</script>

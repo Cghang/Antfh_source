@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>登录 | {$title}</title>
+
+    <link href="__ADMIN__/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADMIN__/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="__ADMIN__/css/animate.css" rel="stylesheet">
+    <link href="__ADMIN__/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="loginColumns animated fadeInDown">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3>蚂蚁防红</h3>
+            <div class="ibox-title">蚂蚁防红后台登陆</div>
+            <div class="ibox-content">
+                <div class="m-t">
+                    <div class="form-group">
+                        <input type="text" id="username" class="form-control" placeholder="用户名" required="">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="pwd" class="form-control" placeholder="密码" required="">
+                    </div>
+                    <button type="submit" onclick="login()" class="btn btn-primary block full-width m-b">登录</button>
+
+
+                </div>
+                <p class="m-t">
+                </p>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-6">
+            蚂蚁防红 版权所有
+        </div>
+        <div class="col-md-6 text-right">
+            <small>© 2018-2020</small>
+        </div>
+    </div>
+</div>
+
+</body>
+<!-- Mainly scripts -->
+<script src="__ADMIN__/js/jquery-2.1.1.js"></script>
+<script src="__ADMIN__/js/bootstrap.min.js"></script>
+<script src="__ADMIN__/js/plugins/layer/layer.min.js"></script>
+<script type="text/javascript">
+    $(document).keyup(function(event){
+        if(event.keyCode ==13){
+            login();
+        }
+    });
+    function login(){
+        var username = $("#username").val(),
+            password = $("#pwd").val();
+        layer.msg('正在登陆···', {icon: 16,shade: 0.01,time: 15000});
+        $.ajax( {
+            type: "POST",
+            url: "{:url('login')}",
+            dataType: "json",
+            timeout : 15000, //超时时间设置，单位毫秒
+            data: {username:username,password:password},
+            success: function(data){
+                if(data.code == 1){
+                    layer.msg('登入成功', {icon: 1,time: 1500}, function(){
+                        location.href = "/admin"; //后台主页
+                    });
+                }else{
+                    layer.alert(data.msg);
+                }
+            },
+            error: function(request,status,error) {
+                if (status == "timeout"){
+                    layer.alert('登陆超时，请重试！');
+                }else{
+                    layer.alert('连接失败，请重试！');
+                }
+                return false;
+            },
+        });
+    }
+</script>
+</html>

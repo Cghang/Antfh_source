@@ -1,0 +1,125 @@
+{include file="common/header"/}
+        <section class="under-head-cont main-index-top" style="">
+
+            <svg id="wave" viewBox="0 0 100 15" style="position: absolute;bottom: 0;z-index: 0;"><path fill="#fff" opacity="0.5" d="M0 30 V15 Q30 3 60 15 V30z"></path><path fill="#fff" d="M0 30 V12 Q30 17 55 12 T100 11 V30z"></path></svg>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="overlaylink">
+                            <div class="link-shared" id="modal">
+                                <!-- close trigger -->
+                                <div class="closelink">
+                                    <span><i class="zmdi zmdi-close"></i></span>
+                                </div>
+                                <!-- modal content -->
+                                <div class="modal-contentlink">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="share-this"></div>
+                        <div class="ajax"></div>
+                        <div class="p-relative">
+                <div class="content-right">
+                    <div class="title">生成防红短网址</div>
+                    <div class="content">
+                        <div class="col-md-2">
+                        <select id="type" class="form-control">
+                            <option value="1">t.cn [新浪]</option>
+                            <option value="3">url.cn [腾讯]</option>
+                            <option value="4">w.url.cn [微信]</option>
+                        </select>
+                        </div>
+                        <div class="col-md-7 shortfieldz">
+                            <input type="text" class="form-control main-input" name="keyword" id="url" placeholder="输入域名（需要添加http/https）">
+                        </div>
+                        <div class="col-md-3 shortbtnz">	<button class="btn btn-default btn-block main-button" type="submit" id="ajax_key">缩短</button></div>
+                    </div>
+                    <div id="tips"></div>
+                </div>
+            </div>
+        </div>
+                    <!-- JS输出	-->
+                    <script type="text/javascript">
+                        $(document).ready(function(){
+                        $('#ajax_key').click(function (){
+                        if($("#url").val() != ""){
+                        var url=document.getElementById("url").value;
+                        var reg=/[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/;
+                        if(!reg.test(url)){
+                        alert("请输入正确域名");
+                        return;
+                        }
+                        }
+                        layer.load(1);
+                        $.ajax({
+                        url: "/ShortUrl",
+                        type: "GET",
+                        dataType: "json",
+                        data: "longurl=" + $.trim($("#url").val()) + "&type=" + $("#type").val(),
+                        success: function(data){
+                        layer.closeAll('loading');
+                        var oDiv = document.getElementById('tips');
+                        if (data.code == 1) {
+                        oDiv.innerHTML = '<center><div class="tips"><div class="tips-content">&nbsp生成成功：<a href=' + data.anturl + ' target="_blank">' + data.anturl + '</a></div></div></center>';
+                        }else{
+                        oDiv.innerHTML = '<center><div class="tips"><div class="tips-content">&nbsp生成失败：' + data.msg + '</div></div></center>';
+                        }
+                        },
+                        error: function(e){
+                        layer.closeAll('loading');
+                        var oDiv = document.getElementById('tips');
+                        oDiv.innerHTML = '<center><div class="tips"><div class="tips-content">&nbsp生成失败，API通讯失败</div></div></center>';
+                        }
+                        });
+                        });
+                        });
+                    </script>
+                    <!-- /.main-form -->
+                </form><!--/.form-->
+            </div>
+        </div>
+    </div>
+</div>
+        </section>
+
+<section class="urls-holder">
+<div class="container content">
+<div class="row" id="user-content">
+    <div class="col-md-12 addmargin public_list text-center" id="data-container">
+        <div class="url-list fix" id="url-container-0" data-id="0">
+
+        </div>
+    </div>
+</div>
+</section>
+<section class="infinity-stats">
+<div class="container">
+    <div class="row stats">
+        <div class="col-xs-4">
+            <div class="infinity-facts">
+                <p>今日生成链接数</p>
+                <h3 id="count_vip">
+                    {$data['visit']['new_today']} 次
+                </h3>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="infinity-facts">
+                <p>生成链接总数</p>
+                <h3 id="count_dwz">
+                    {$data['all']['id']} 次
+                </h3>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="infinity-facts">
+                <p>总访问次数</p>
+                <h3 id="count_tongji">
+                    {$data['visit']['visit_all']} 次
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="common/footer"/}

@@ -1,0 +1,43 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>	模版管理</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:url('/Admin/index')}">主页</a>
+            </li>
+            <li>跳转模版管理</li>
+            <li class="active">
+                <strong>	模版选择</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+    <div class="alert alert-warning">当前功能属于测试阶段，模版功能即将更新完成</div>
+<div class="col-md-4">
+    <div class="ibox-content">
+        <h3>蚂蚁防红 - 专属模版</h3>
+        <div class="m-b-sm">
+            <img alt="image" class="img-responsive" style="" src="https://mirrors.mzhipay.com/Antfh/img/antfh/ant_view.png">
+        </div>
+
+        <div class="product-desc">
+            <small class="text-muted">系统赠送</small>
+            <a href="#" class="product-name"> 青云一号</a>
+            <div class="small m-t-xs">
+                含各个客户端的跳转和直链模版
+            </div>
+            <div class="m-t text-righ">
+
+                <a href="#" class="btn btn-xs btn-outline btn-primary">详情 <i class="fa fa-long-arrow-right"></i> </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+document.title = '{$title} - 蚂蚁防红';
+</script>

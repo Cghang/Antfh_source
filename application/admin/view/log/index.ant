@@ -1,0 +1,143 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>日志查询</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:url('/Admin/index')}">主页</a>
+            </li>
+            <li>
+                <a>日志管理</a>
+            </li>
+            <li class="active">
+                <strong>日志列表</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label" for="uid">操作者ID</label>
+                    <input type="text" id="uid" placeholder="请输入 ..." name="uid" value="" class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label" for="module">模块</label>
+                    <select name="payStatus" id="module" class="form-control">
+                        <option value="" selected>所有</option>
+                        <option value="admin">admin</option>
+                        <option value="index">index</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+
+                <div class="form-group">
+                    <label class="font-noraml">开始时间</label>
+                    <div class="input-group date form_datetime">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="starttime" name="starttime" value="{$starttime}" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',skin:'default',onpicked:pickedFunc})" class="form-control" >
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+
+                <div class="form-group">
+                    <label class="font-noraml">结束时间</label>
+                    <div class="input-group date form_datetime">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="endtime" name="endtime"  value="{$endtime}" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',skin:'default',onpicked:pickedFunc2})" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label" >操作</label>
+                    <a id="btnSearch" class="btn btn-info btn-block">查询日志</a>
+                </div></div>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+
+                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                        <thead>
+                        <tr>
+
+                            <th>执行者UID</th>
+                            <th>操作模块</th>
+                            <th>行为</th>
+                            <th>描述</th>
+                            <th>执行URL</th>
+                            <th>操作IP</th>
+                            <th>状态</th>
+                            <th>执行时间</th>
+                            <th class="text-right" data-sort-ignore="true">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="view"> </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                    <div id="page"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="tempList" type="text/html">
+    <tr>
+        {{#  layui.each(d.data.data, function(index, item){ }}
+        <td>{{ item.uid }}   </td>
+        <td> {{ item.module }}</td>
+        <td> {{ item.action }}</td>
+        <td>  {{ item.describe }} </td>
+        <td> {{ item.url }} </td>
+        <td> {{ item.ip }}</td>
+        <td> {{#  if(item.status == 1){ }}
+            <span class="label label-success">操作成功</span>
+            {{#  }else if(item.status == 2){ }}
+            <span class="label label-danger">操作失败</span>
+            {{# } }}  </td>
+        <td> {{ item.create_time }} </td>
+        <td class="text-right">
+            <div class="btn-group">
+                <button class="btn-warning btn btn-xs">删除</button>
+            </div>
+        </td>
+    </tr>
+    {{#  }); }}
+    {{#  if(d.data.data.length === 0){ }}
+    <tr>
+        <td colspan="9">&nbsp;</td>
+    </tr>
+    <tr>
+        <td style="color:blue;" colspan="8" align="center">{{ d.msg }}</td>
+    </tr>
+    <tr>
+        <td colspan="9">&nbsp;</td>
+    </tr>
+    {{#  } }}
+</script>
+
+
+<link rel="stylesheet" href="__ADMIN__/layui/css/laypage.css"  media="all">
+<script type="text/javascript" src="__ADMIN__/My97DatePicker/WdatePicker.js"></script>
+<script src="__ADMIN__/layui/layui.js"></script>
+<script src="__ADMIN__/layui/admin.log.js?t={:time()}"></script>
+<script type="text/javascript">
+    document.title = '{$title} - 蚂蚁防红';
+</script>

@@ -1,0 +1,5 @@
+{include file="common/header" title="$title - $config['website']['title']"/}
+<div id="pjax-container">
+{__CONTENT__}
+</div>
+{include file="common/footer" /}

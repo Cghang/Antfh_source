@@ -1,0 +1,85 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>	检测更新</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:url('/Admin/index')}">主页</a>
+            </li>
+            <li>网站管理</li>
+            <li class="active">
+                <strong>	检测更新</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>检测更新 </h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#">无</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="form-horizontal">
+
+                    {if $ver neq ''}
+                    <div class="alert alert-success alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        蚂蚁防红检查到新版本：<font color="red">Ver {$ver.ver}</font> 更新如下...<br>
+                        {$ver.msg|raw}
+                    </div>
+                    <div id="progress" style="display:none;">
+                    <h3 id="progressmsg">准备开始下载：</h3>
+                    <div class="progress progress-mini">
+                        <div style="width: 78%;" class="progress-bar" id="progressbar"></div>
+                    </div></div>
+                    <hr>
+                    <button id="update" class="btn btn-warning">立即更新</button>
+                    {else/}
+                    <div class="alert alert-success alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        暂未检测到新版本
+                    </div>
+                    {/if}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+$("#update").click(function () {
+$.ajax({
+type: 'POST',
+url: '{:url('website/doUpdate')}', // 自定义接收url
+dataType: 'json',
+success: function (data) {
+if (data.code === 1) {
+layer.msg(data.msg,{ icon:1, time:3500, shade:0.4 });
+}else{
+layer.msg(data.msg,{ icon:2, time:2000, shade:0.4 });
+}
+},
+error: function (data) {
+layer.alert(data.msg);
+},
+});});
+document.title = '{$title} - 蚂蚁防红';
+</script>

@@ -1,0 +1,107 @@
+<!-- www
+ ================================
+// +----------------------------+
+// | Name: 蚂蚁防红网
+// +----------------------------+
+// | Domain: www.antfh.net
+// +----------------------------+
+// | Author: 蚂蚁防红系统
+// +----------------------------+
+// | Date: 2019年08月15日
+// +----------------------------+
+=================================
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+        <title>{$title} - 域名防红|防红短链接|防红在线生成|蚂蚁免费防红</title>
+        <meta name="Keywords" content="域名防红,蚂蚁防洪,域名防洪,防红短链接,防红短网址,防红接口,防红跳转,QQ防红,微信防红,微信防封" />
+        <meta name="Description" content="蚂蚁防红,QQ防红，微信防红，域名防红工具使用后可以让被红被拦截的域名正常打开（QQ和微信），直连防红（可在QQ/微信内直接打开），助站长成长，解决推广难题。蚂蚁防红免费版永久免费，永久更新防红接口！" />
+        <!-- Bootstrap core CSS -->
+        <link href="__ANT__/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Component CSS -->
+        <link rel="stylesheet" type="text/css" href="__ANT__/css/style.css">
+        <link rel="stylesheet" type="text/css" href="__ANT__/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="__ANT__/css/styles.css">
+        <!-- Required Javascript Files -->
+        <script type="text/javascript" src="__ANT__/js/jquery.min.js"></script>
+        <!--[if lt IE 9]>
+          <script src="http://cdn.staticfile.org/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="http://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <style>
+            .notgood {
+            position: fixed;
+            z-index: 10001;
+            }
+            .notgood .not-bgc {
+            display: block;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(11,21,49,.6);
+            }
+            .notgood .good-box {
+            display: block;
+            box-sizing: border-box;
+            position: fixed;
+            width: 235px;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate3d(-50%,-50%,0);
+            transform: translate3d(-50%,-50%,0);
+            padding: 24px 24px 28px;
+            background-color: #fff;
+            border-radius: 10px;
+            z-index: 10002;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,.2);
+            }
+            .notgood .good-content {
+            color: #0b1531;
+            font-size: 16px;
+            line-height: 1.5;
+            }
+            .notgood .good-btn {
+            margin-top: 20px;
+            display: inline-block;
+            width: 110px;
+            height: 37px;
+            line-height: 37px;
+            border-radius: 20px;
+            border: 2px solid #e0eaff;
+            color: #7d8bb3;
+            font-size: 13px;
+            }
+        </style>
+    </head>
+    <div id="focus-overlay" style="display: none"></div>
+    <body class='light home' id="body">
+        <a href="index.html#body" id="back-to-top"><i class="zmdi zmdi-chevron-up"></i></a>
+        <header>
+            <div class="navbar" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" onclick="In_headerFunction()">
+                            <i class="zmdi zmdi-menu"></i>
+                        </button>
+                        <a class="navbar-brand" href="/">
+                            {$title}					                </a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{:url('index/index')}">首页</a></li>
+                            <li><a href="https://wpa.qq.com/msgrd?v=3&uin={$qq}&site=qq&menu=yes" target="_blank">联系站长</a></li>
+                            <li><a href="{:url('index/api')}">API接口</a></li>
+                            <li><a href="http://api.antfh.net/" target="_blank" class="active">免费API接口调用平台</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>

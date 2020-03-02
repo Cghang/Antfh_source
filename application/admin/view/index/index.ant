@@ -1,0 +1,142 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        {if $ver neq ''}
+        <div class="alert alert-warning alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            蚂蚁防红Free检查到新版本：<font color="red">Ver {$ver.ver}</font> 更新如下...
+            <a class="alert-link" href="{:url('Website/update')}">查看详细</a>
+        </div>
+        {/if}
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-success pull-right">月</span>
+                    <h5>链接总访问</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{$red.visit_all|default=0}</h1>
+                    <div class="stat-percent font-bold text-success">0% <i class="fa fa-bolt"></i>
+                    </div>
+                    <small>访问</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-info pull-right">月</span>
+                    <h5>今日已红</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{$red.red_today|default=0}</h1>
+                    <div class="stat-percent font-bold text-info">0% <i class="fa fa-level-up"></i>
+                    </div>
+                    <small>域名</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">月</span>
+                    <h5>今日新生成</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{$red.new_today|default=0} </h1>
+                    <div class="stat-percent font-bold text-navy">0% <i class="fa fa-level-up"></i>
+                    </div>
+                    <small>域名</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-danger pull-right">总</span>
+                    <h5>总链接数</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{$all.id}</h1>
+                    <div class="stat-percent font-bold text-danger">0% <i class="fa fa-level-down"></i>
+                    </div>
+                    <small>全站</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>开发者</h5>
+                </div>
+                <div class="ibox-content ibox-heading">
+                    <h3><img class="w12 h12 b b3 r5" src="//q4.qlogo.cn/headimg_dl?dst_uin=7019732&amp;spec=40" style="border:1px solid #B5B5B5;padding:3px;"> 蚂蚁防红： Dany</h3>
+                    <small><i class="fa fa-tim"></i> Ver {$nowver} - Antfh - Free</small>
+                </div>
+                <div class="ibox-content">
+                    <div class="feed-activity-list">
+
+                        <div class="feed-element">
+                            <div>
+                                <small class="pull-right text-navy">现在</small>
+                                <strong>管理员</strong>
+                                <div>欢迎使用蚂蚁防红,开发者qq7019732</div>
+                                <small class="text-muted">2月1日 7:00</small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-8">
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>最近更新</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <ul class="todo-list m-t small-list ui-sortable">
+                                <li>
+                                    <a href="widgets.html#" class="check-link"><i class="fa fa-check-square"></i> </a>
+                                    <span class="m-l-xs todo-completed">Free版开发完成</span>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                showMethod: 'slideDown',
+                timeOut: 4000
+            };
+            toastr.success('欢迎使用蚂蚁防红-Free', '后台数据加载成功');
+
+        }, 1300);
+    });
+    document.title = '{$title} - 蚂蚁防红 - Free';
+</script>
+

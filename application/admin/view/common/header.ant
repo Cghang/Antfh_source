@@ -1,0 +1,173 @@
+<!-- www
+ ================================
+// +----------------------------+
+// | Name: 蚂蚁防红网
+// +----------------------------+
+// | Domain: www.antfh.net
+// +----------------------------+
+// | Author: 蚂蚁防红系统
+// +----------------------------+
+// | Date: 2019年08月15日
+// +----------------------------+
+=================================
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[title]</title>
+    <link href="__ADMIN__/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADMIN__/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <!-- Toastr style -->
+    <link href="__ADMIN__/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="__ADMIN__/css/animate.css" rel="stylesheet">
+    <link href="__ADMIN__/css/style.css" rel="stylesheet">
+    <link rel="alternate icon" type="/Public/image/png" href="/favicon.ico">
+    <!-- Mainly scripts -->
+    <script src="__ADMIN__/js/jquery-2.1.1.js"></script>
+    <script src="__ADMIN__/js/bootstrap.min.js"></script>
+    <script src="__ADMIN__/js/jquery.pjax.js"></script>
+    <script src="__ADMIN__/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="__ADMIN__/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+</head>
+<body>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element"> <span>
+                             </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs">当前登陆： <strong class="font-bold">{$admin_info.nickname}</strong>
+                             </span><span class="text-muted text-xs block"> 程序：蚂蚁防红 </span> </span> </a>
+                    </div>
+                    <div class="logo-element">
+                        M
+                    </div>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">数据统计</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a class="J_menuItem" href="{:url('Admin/Index/index')}" data-index="0">数据展示</a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">网站管理</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="{:url('Website/index')}">网站配置</a>
+                        </li>
+                        <li><a class="J_menuItem" href="{:url('Website/tzmodify')}">跳转管理</a>
+                        </li>
+                        <li><a class="J_menuItem" href="{:url('Website/template')}">模版选择</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-openid"></i> <span class="nav-label">链接管理</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="{:url('Fhdomain/index')}">链接查询</a>
+                        </li>
+                        <li><a class="J_menuItem" href="{:url('Fhdomain/addFhdomain')}">添加链接</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-chain"></i> <span class="nav-label">跳转管理</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="{:url('Tzdomain/index')}">域名管理</a>
+                        </li><li><a class="J_menuItem" href="{:url('Tzdomain/addTzdomain')}">添加跳转</a>
+                        </li>
+                    </ul>
+                </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-share"></i> <span class="nav-label">落地管理</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="{:url('Lddomain/index')}">域名管理</a>
+                            </li><li><a class="J_menuItem" href="{:url('Lddomain/addLddomain')}">添加落地</a>
+                            </li>
+                        </ul>
+                    </li>
+                <li>
+                <li>
+                <a href="#"><i class="fa fa-code"></i> <span class="nav-label">API管理</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li><a class="J_menuItem" href="{:url('Website/apiset')}">检测配置</a>
+                    </li>
+                    <li><a class="J_menuItem" href="{:url('Website/update')}">检查更新</a>
+                    </li>
+                    <li><a class="J_menuItem" href="{:url('Website/job')}">防红检测</a>
+                    </li>
+                    </li>
+                </ul>
+            </li>
+
+
+                <!--li>
+                    <a href="#"><i class="fa fa-bullhorn"></i> <span class="nav-label">公告通知</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="{:url('Announce/ament')}">查看公告</a>
+                        </li>
+                        <li><a class="J_menuItem" href="{:url('Announce/ament')}">创建公告</a>
+                        </li>
+                    </ul>
+                </li-->
+
+                <li>
+                    <a href="#"><i class="fa fa-lock"></i> <span class="nav-label">操作日志</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="{:url('Log/index')}">查看日志</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="J_menuItem" href="{:url('Index/reset_password')}"><i class="fa fa-cog"></i> <span class="nav-label">修改密码</span></a>
+                </li>
+        <li>
+            <a class="J_menuItem" onclick="logout()"><i class="fa fa-magic"></i> <span class="nav-label">退出登陆</span></a>
+        </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">欢迎来到蚂蚁防红后台</span>
+                    </li>
+
+
+
+
+                    <li>
+                        <a href="{:url('Index/reset_password')}">
+                            <i class="fa fa-sign-out"></i> 修改密码
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="logout()">
+                            <i class="fa fa-sign-out"></i> 退出登录
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>

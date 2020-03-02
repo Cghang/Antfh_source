@@ -1,0 +1,99 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>	添加域名</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:url('/Admin/index')}">主页</a>
+            </li>
+            <li>落地域名</li>
+            <li class="active">
+                <strong>	添加</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>添加域名 </h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#">无</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">域名(带http://)</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="url" value="http://" class="form-control"/>
+                                    <span>如：http://baidu.com 无需结尾</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">权重</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="imp" value="100" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">泛解析</label>
+                        <div class="col-sm-10">
+                            <input type="checkbox" name="fjx" id="fjx" value="1"/> <i></i>开启后随机二级域名生成防红链接
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-primary" id="add">添加</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+
+$("#add").click(function () {
+$.ajax({
+type: 'POST',
+url: '{:url('lddomain/doaddLddomain')}', // 自定义接收url
+dataType: 'json',
+data: {
+url: $('#url').val(),
+imp: $('#imp').val(),
+fjx: $("#fjx").is(":checked")
+},
+success: function (data) {
+if (data.code === 1) {
+layer.msg(data.msg);
+}else{
+layer.msg(data.msg);
+}
+},
+error: function (data) {
+layer.alert(data.msg);
+},
+});
+});
+document.title = '{$title} - 蚂蚁防红';
+</script>

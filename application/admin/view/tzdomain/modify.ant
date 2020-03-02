@@ -1,0 +1,122 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>跳转链接管理</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:url('/Admin/index')}">主页</a>
+            </li>
+            <li>
+                <a href="{:url('tzdomain/index')}">跳转链接管理</a>
+            </li>
+            <li class="active">
+                <strong>链接列表</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div><div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>链接信息 </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">无</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <input type="hidden" id="id" value="{$domain.id}">
+                            <label class="col-sm-2 control-label">跳转链接:</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" id="url" value="{$domain.url}" class="form-control">
+                                        <small>[修改跳转链接]并不会变更已经生成的短链接的[跳转域名]</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">生成权重:</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" id="imp" value="{$domain.imp}" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">访问次数</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" value="{$domain.visit}" disabled=""/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">域名状态:</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" placeholder="" value="{$domain.status}" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">泛解析</label>
+                            <div class="col-sm-10">
+                                <input type="checkbox" name="fjx" id="fjx" {if $domain['fjx'] eq 1}checked=""{/if}/> <i></i>开启后落地随机二级域名跳转
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" id="update">更新链接</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$("#update").click(function () {
+$.ajax({
+type: 'POST',
+url: '{:url('tzdomain/doModify')}', // 自定义接收url
+dataType: 'json',
+data: {
+url: $('#url').val(),
+imp: $('#imp').val(),
+id: $('#id').val(),
+fjx: $("#fjx").is(":checked")
+},
+success: function (data) {
+if (data.code === 1) {
+layer.msg('信息保存成功');
+}else{
+layer.msg(data.msg);
+}
+},
+error: function (data) {
+layer.alert(data.msg);
+},
+});
+});
+
+document.title = '{$title} - 蚂蚁防红';
+</script>
