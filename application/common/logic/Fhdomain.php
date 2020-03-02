@@ -62,6 +62,7 @@ class Fhdomain extends BaseLogic
             $tzurl = $tzdomain['url'].'/Url.html?ant='.$jump_short;
             $data['jump_short'] = $jump_short;
             $data['tid'] = $tzdomain['id'];
+            $data['out_time'] = time() + 60*60*24;
            // print_r()
             $website = $this->logicWebsite->getWebsiteInfo(['id'=>1]);
             $data['shorturl'] = ShortUrl::short($tzurl,$data['type'],$website['token']);

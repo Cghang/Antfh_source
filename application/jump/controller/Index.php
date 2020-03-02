@@ -55,7 +55,7 @@ class Index extends Common
         $jump['code'] == 0?$this->result($jump):null;
         $getclient = $this->logicJump->doJumpClient($UserInfo);
         $client = $getclient['client'];//获取客户端
-        $jump_type = $this->logicJump->getJumpType($jump['data']['uid'],$this->website['is_jump']);
+        $jump_type = $this->website['is_jump'];
         $temp = $this->logicJump->getJumpCilent($client,$jump_type);
         if(!in_array($client,[1,2,3,4,5]) && $this->website['is_webjump'] == 1){
             $this->redirect($this->website['jumpurl']);

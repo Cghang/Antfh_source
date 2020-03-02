@@ -21,8 +21,7 @@ use think\Exception;
 class Jump extends BaseLogic
 {
 
-    public function checkUser($uid,$fh){
-        if($uid == 0){
+    public function checkUser($fh){
             if ($fh['out_time'] < time()){
                 throw new OuttimeException([
                     'msg' => "该条链接已到期，请充值或续费！",
@@ -30,24 +29,6 @@ class Jump extends BaseLogic
                 ]);
             }
             return;
-        }
-        $user = $this->logicUser->getUserInfo(['uid'=>$uid]);
-        //print_r($user);exit;
-        if ($user['type'] == 2){
-            if ($user['out_time'] < time()){
-                throw new OuttimeException([
-                    'msg' => "账号已到期，请充值或续费！",
-                    'errorCode' => CodeEnum::ERROR
-                ]);
-            }
-        }elseif($user['type'] == 1){
-            if ($fh['out_time'] < time()){
-                throw new OuttimeException([
-                    'msg' => "该条链接已到期，请充值或续费！",
-                    'errorCode' => CodeEnum::ERROR
-                ]);
-            }
-        }
     }
 
     public function doJump($ant = '')
@@ -58,9 +39,10 @@ class Jump extends BaseLogic
         }
         $list = $this->logicLddomain->getLddomainRand();
         if(!$list){return ['code'=>CodeEnum::ERROR,'msg'=>'请联系管理员添加落地域名！'];}
-        $fhdomain = $this->logicFhdomain->getFhdomainInfo(['jump_short'=>$ant],'id,tid,uid,out_time');
+        $fhdomain = $this->logicFhdomain->getFhdomainInfo(['jump_short'=>$ant],'id,tid,out_time');
         if(!$fhdomain){return ['code'=>CodeEnum::ERROR,'msg'=>'跳转码不存在，请勿非法操作！'];}
-        $this->CheckUser($fhdomain['uid'],$fhdomain);
+        //$this->checkUser($fhdomain);
+        //Todo 下个版本加入到期功能
         $this->logicTzdomain->setTzdomainInc(['id'=>$fhdomain['tid']]);//setinc
         $this->logicLddomain->setLddomainInc(['id'=>$list['id']]);
         return ['code'=>CodeEnum::SUCCESS,'msg'=>'获取落地页成功，正在跳转','jumpurl'=>$list['url'].'/Look.html?fid='.$ant.'_'.$fhdomain['id'].'&_wv=alert%28%27pcqq%27%29'];
@@ -74,7 +56,7 @@ class Jump extends BaseLogic
         $jump_url = explode('_',$fid);
         //if (!session('referrer') || session('referrer') !=  $jump_url['0'])//来源认证
         //{return ['code'=>CodeEnum::ERROR,'msg'=>'请勿非法操作！'];}
-        $fhdomain = $this->logicFhdomain->getFhdomainInfo(['id'=>$jump_url['1']],'id,tid,jump_short,longurl,title,uid');
+        $fhdomain = $this->logicFhdomain->getFhdomainInfo(['id'=>$jump_url['1']],'id,tid,jump_short,longurl,title');
         if(!$fhdomain || $fhdomain['jump_short'] != $jump_url['0']){return ['code'=>CodeEnum::ERROR,'msg'=>'跳转码不存在，请勿非法操作！'];}
         $this->logicFhdomain->setFhdomainInc(['id'=>$fhdomain['id']]);//
         return ['code'=>CodeEnum::SUCCESS,'msg'=>'跳转验证通过，开始匹配客户端','data'=>$fhdomain,'longurl'=>$fhdomain['longurl']];
@@ -153,11 +135,4 @@ class Jump extends BaseLogic
         return ['fetch'=>$fetch,'client'=>$client];
     }
 
-    public function getJumpType($uid,$sys_jump){
-        if ($uid == 0){
-            return $sys_jump;
-        }
-        $userinfo = $this->logicUser->getInfo(['uid'=>$uid]);
-        return $userinfo['is_jump'] == 1 ?$sys_jump:($userinfo['is_jump'] == 2?1:$userinfo['is_jump']);//1 为默认跟随系统 0直连 2跳转
-    }
 }
