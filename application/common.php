@@ -394,4 +394,5 @@ function escape($string, $in_encoding = 'UTF-8',$out_encoding = 'UCS-2') {
     }
     return $return;
 }
+
 ?>

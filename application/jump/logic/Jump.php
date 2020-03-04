@@ -41,8 +41,7 @@ class Jump extends BaseLogic
         if(!$list){return ['code'=>CodeEnum::ERROR,'msg'=>'请联系管理员添加落地域名！'];}
         $fhdomain = $this->logicFhdomain->getFhdomainInfo(['jump_short'=>$ant],'id,tid,out_time');
         if(!$fhdomain){return ['code'=>CodeEnum::ERROR,'msg'=>'跳转码不存在，请勿非法操作！'];}
-        //$this->checkUser($fhdomain);
-        //Todo 下个版本加入到期功能
+        $this->checkUser($fhdomain);
         $this->logicTzdomain->setTzdomainInc(['id'=>$fhdomain['tid']]);//setinc
         $this->logicLddomain->setLddomainInc(['id'=>$list['id']]);
         return ['code'=>CodeEnum::SUCCESS,'msg'=>'获取落地页成功，正在跳转','jumpurl'=>$list['url'].'/Look.html?fid='.$ant.'_'.$fhdomain['id'].'&_wv=alert%28%27pcqq%27%29'];
@@ -56,7 +55,8 @@ class Jump extends BaseLogic
         $jump_url = explode('_',$fid);
         //if (!session('referrer') || session('referrer') !=  $jump_url['0'])//来源认证
         //{return ['code'=>CodeEnum::ERROR,'msg'=>'请勿非法操作！'];}
-        $fhdomain = $this->logicFhdomain->getFhdomainInfo(['id'=>$jump_url['1']],'id,tid,jump_short,longurl,title');
+        $fhdomain = $this->logicFhdomain->getFhdomainInfo(['id'=>$jump_url['1']],'id,tid,jump_short,longurl,title,out_time');
+        $this->checkUser($fhdomain);
         if(!$fhdomain || $fhdomain['jump_short'] != $jump_url['0']){return ['code'=>CodeEnum::ERROR,'msg'=>'跳转码不存在，请勿非法操作！'];}
         $this->logicFhdomain->setFhdomainInc(['id'=>$fhdomain['id']]);//
         return ['code'=>CodeEnum::SUCCESS,'msg'=>'跳转验证通过，开始匹配客户端','data'=>$fhdomain,'longurl'=>$fhdomain['longurl']];

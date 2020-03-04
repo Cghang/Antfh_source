@@ -87,7 +87,8 @@ class Index extends Common
         $html = escape($html);
         $html = str_replace('%',' ',$html);
         $func = getRandChar(5);
-        return '<script>function '.$func.'('.$jump['data']['jump_short'].'){document.write((unescape('.$jump['data']['jump_short'].')));};'.$func.'("'.$html.'".replace(/ /g,"%"));</script>';
+        $funcin = preg_replace("/\\d+/",'', $jump['data']['jump_short']);
+        return '<script>function '.$func.'('.$funcin.'){document.write((unescape('.$funcin.')));};'.$func.'("'.$html.'".replace(/ /g,"%"));</script>';
         //return $html;
     }
 

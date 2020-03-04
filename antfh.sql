@@ -105,41 +105,6 @@ CREATE TABLE `ant_lddomain` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ant_msg_notify`
---
-
-CREATE TABLE `ant_msg_notify` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `pushlog_id` int(10) UNSIGNED NOT NULL,
-  `is_status` int(3) UNSIGNED NOT NULL DEFAULT '404',
-  `result` varchar(300) NOT NULL DEFAULT '' COMMENT '请求相响应',
-  `times` smallint(5) UNSIGNED NOT NULL DEFAULT '0' COMMENT '请求次数',
-  `create_time` int(10) UNSIGNED NOT NULL COMMENT '创建时间',
-  `update_time` int(10) UNSIGNED NOT NULL COMMENT '更新时间'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='通知服务队列表';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ant_pushlog`
---
-
-CREATE TABLE `ant_pushlog` (
-  `id` bigint(10) NOT NULL COMMENT '通知id',
-  `uid` mediumint(8) NOT NULL COMMENT '用户id',
-  `cid` mediumint(8) NOT NULL COMMENT '通道id',
-  `subject` varchar(64) NOT NULL COMMENT '通知标题',
-  `body` varchar(256) NOT NULL COMMENT '通知描述信息',
-  `openid` varchar(30) NOT NULL COMMENT '通知openid',
-  `client_ip` varchar(32) NOT NULL COMMENT '客户端IP',
-  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '通知状态:0-通知失败-1-通知中，2-已通知',
-  `create_time` int(10) UNSIGNED NOT NULL COMMENT '创建时间',
-  `update_time` int(10) UNSIGNED NOT NULL COMMENT '更新时间'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='通知记录表';
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `ant_tzdomain`
 --
 
@@ -264,24 +229,6 @@ ALTER TABLE `ant_admin`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
---
--- Indexes for table `ant_api`
---
-ALTER TABLE `ant_api`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `api_domain_unique` (`id`,`domain`,`uid`) USING BTREE;
-
---
--- Indexes for table `ant_channel`
---
-ALTER TABLE `ant_channel`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `ant_channel_openid`
---
-ALTER TABLE `ant_channel_openid`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `ant_fhdomain`
@@ -295,19 +242,6 @@ ALTER TABLE `ant_fhdomain`
 ALTER TABLE `ant_lddomain`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `ant_msg_notify`
---
-ALTER TABLE `ant_msg_notify`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `pushlog_id` (`pushlog_id`);
-
---
--- Indexes for table `ant_pushlog`
---
-ALTER TABLE `ant_pushlog`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `pushlog_index` (`uid`,`cid`) USING BTREE;
 
 --
 -- Indexes for table `ant_tzdomain`
@@ -318,10 +252,6 @@ ALTER TABLE `ant_tzdomain`
 --
 -- Indexes for table `ant_user`
 --
-ALTER TABLE `ant_user`
-  ADD PRIMARY KEY (`uid`),
-  ADD UNIQUE KEY `user_name_unique` (`uid`,`username`) USING BTREE;
-
 --
 -- Indexes for table `ant_user_bill`
 --
@@ -353,21 +283,6 @@ ALTER TABLE `ant_admin`
 --
 -- AUTO_INCREMENT for table `ant_api`
 --
-ALTER TABLE `ant_api`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT for table `ant_channel`
---
-ALTER TABLE `ant_channel`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '通道ID';
-
---
--- AUTO_INCREMENT for table `ant_channel_openid`
---
-ALTER TABLE `ant_channel_openid`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '通道ID';
-
 --
 -- AUTO_INCREMENT for table `ant_fhdomain`
 --
@@ -381,34 +296,10 @@ ALTER TABLE `ant_lddomain`
   MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT 'id', AUTO_INCREMENT=1;
 
 --
--- AUTO_INCREMENT for table `ant_msg_notify`
---
-ALTER TABLE `ant_msg_notify`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `ant_pushlog`
---
-ALTER TABLE `ant_pushlog`
-  MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '通知id';
-
---
 -- AUTO_INCREMENT for table `ant_tzdomain`
 --
 ALTER TABLE `ant_tzdomain`
   MODIFY `id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT 'id', AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT for table `ant_user`
---
-ALTER TABLE `ant_user`
-  MODIFY `uid` mediumint(8) NOT NULL AUTO_INCREMENT COMMENT '用户uid', AUTO_INCREMENT=100001;
-
---
--- AUTO_INCREMENT for table `ant_user_bill`
---
-ALTER TABLE `ant_user_bill`
-  MODIFY `id` bigint(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键', AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `ant_website`
