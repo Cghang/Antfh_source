@@ -26,7 +26,7 @@ class Fhdomain extends BaseLogic
     public function getFhdomainIndexStat($where = []){
         $order = 'create_time desc';
         return [
-            'visit' => $this->modelFhdomain->getInfo($where,"sum(visit) as visit_all,count(if(update_time>=".mktime(0,0,0,date('m'),date('d'),date('Y')).",true,null)) as new_today", $order, $paginate = false),
+            'visit' => $this->modelFhdomain->getInfo($where,"COALESCE(sum(visit),0) as visit_all,count(if(update_time>=".mktime(0,0,0,date('m'),date('d'),date('Y')).",true,null)) as new_today", $order, $paginate = false),
             'all' => $this->modelFhdomain->getInfo([],"count(id) as id", $order, $paginate = false)
         ];
     }
@@ -58,13 +58,13 @@ class Fhdomain extends BaseLogic
                 Db::commit();
                 return ['code' => CodeEnum::SUCCESS, 'msg'=> '链接已重新生成','anturl' => $shorturl];
             }
+            $website = $this->logicWebsite->getWebsiteInfo(['id'=>1]);
             $jump_short = ShortCode::encode($data['longurl'])[rand(0,3)];
             $tzurl = $tzdomain['url'].'/Url.html?ant='.$jump_short;
             $data['jump_short'] = $jump_short;
             $data['tid'] = $tzdomain['id'];
-            $data['out_time'] = time() + 60*60*24;
+            $data['out_time'] = time() + $website['expired_time']*60*60*24;
            // print_r()
-            $website = $this->logicWebsite->getWebsiteInfo(['id'=>1]);
             $data['shorturl'] = ShortUrl::short($tzurl,$data['type'],$website['token']);
             $this->modelFhdomain->setInfo($data);
             //action_log('防红', '新增防红域名,所属UID:'. $data['uid']);

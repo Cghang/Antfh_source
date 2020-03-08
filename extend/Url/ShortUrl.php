@@ -42,17 +42,17 @@ class ShortUrl{
             return $e->getMessage();
         }
         $arr = json_decode($result, true);
-        return isset($arr['shorturl'])?$arr['shorturl']:false;
+        return isset($arr['shorturl'])?$arr['shorturl']:$arr['msg'];
     }
     public static function dwzcn($longurl,$token) {
-        $url='http://api.antfh.net/api/dwz/tcn?longurl='.$longurl.'&token='.$token;
+        $url='http://api.antfh.net/api/dwz/dwzcn?longurl='.$longurl.'&token='.$token;
         try {
             $result = (new Client())->request('GET', $url)->getBody()->getContents();
         } catch (GuzzleException $e) {
             return $e->getMessage();
         }
         $arr = json_decode($result, true);
-        return isset($arr['shorturl'])?$arr['shorturl']:false;
+        return isset($arr['shorturl'])?$arr['shorturl']:$arr['msg'];
     }
     public static function sogouurl($longurl,$token) {
         $url='http://api.antfh.net/api/dwz/urlcn?longurl='.$longurl.'&token='.$token;
@@ -62,7 +62,7 @@ class ShortUrl{
             return $e->getMessage();
         }
         $arr = json_decode($result, true);
-        return isset($arr['shorturl'])?$arr['shorturl']:false;
+        return isset($arr['shorturl'])?$arr['shorturl']:$arr['msg'];
     }
     public static function wurlcn($longurl,$token) {
         $url='http://api.antfh.net/api/dwz/wurlcn?longurl='.$longurl.'&token='.$token;
@@ -72,6 +72,6 @@ class ShortUrl{
             return $e->getMessage();
         }
         $arr = json_decode($result, true);
-        return isset($arr['shorturl'])?$arr['shorturl']:false;
+        return isset($arr['shorturl'])?$arr['shorturl']:$arr['msg'];
     }
 }

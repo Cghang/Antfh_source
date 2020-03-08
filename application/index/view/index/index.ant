@@ -5,6 +5,11 @@
 
             <div class="container">
                 <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="url-list fix">
+                           {$gg|raw}
+                        </div>
+                    </div>
                     <div class="col-md-12">
                         <div class="overlaylink">
                             <div class="link-shared" id="modal">
@@ -39,48 +44,9 @@
                 </div>
             </div>
         </div>
-                    <!-- JS输出	-->
-                    <script type="text/javascript">
-                        $(document).ready(function(){
-                        $('#ajax_key').click(function (){
-                        if($("#url").val() != ""){
-                        var url=document.getElementById("url").value;
-                        var reg=/[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/;
-                        if(!reg.test(url)){
-                        alert("请输入正确域名");
-                        return;
-                        }
-                        }
-                        layer.load(1);
-                        $.ajax({
-                        url: "/ShortUrl",
-                        type: "GET",
-                        dataType: "json",
-                        data: "longurl=" + $.trim($("#url").val()) + "&type=" + $("#type").val(),
-                        success: function(data){
-                        layer.closeAll('loading');
-                        var oDiv = document.getElementById('tips');
-                        if (data.code == 1) {
-                        oDiv.innerHTML = '<center><div class="tips"><div class="tips-content">&nbsp生成成功：<a href=' + data.anturl + ' target="_blank">' + data.anturl + '</a></div></div></center>';
-                        }else{
-                        oDiv.innerHTML = '<center><div class="tips"><div class="tips-content">&nbsp生成失败：' + data.msg + '</div></div></center>';
-                        }
-                        },
-                        error: function(e){
-                        layer.closeAll('loading');
-                        var oDiv = document.getElementById('tips');
-                        oDiv.innerHTML = '<center><div class="tips"><div class="tips-content">&nbsp生成失败，API通讯失败</div></div></center>';
-                        }
-                        });
-                        });
-                        });
-                    </script>
-                    <!-- /.main-form -->
-                </form><!--/.form-->
+
             </div>
         </div>
-    </div>
-</div>
         </section>
 
 <section class="urls-holder">
@@ -122,4 +88,39 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('#ajax_key').click(function (){
+    if($("#url").val() != ""){
+    var url=document.getElementById("url").value;
+    var reg=/[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/;
+    if(!reg.test(url)){
+    alert("请输入正确域名");
+    return;
+    }
+    }
+    layer.load(1);
+    $.ajax({
+    url: "/ShortUrl",
+    type: "GET",
+    dataType: "json",
+    data: "longurl=" + $.trim($("#url").val()) + "&type=" + $("#type").val(),
+    success: function(data){
+    layer.closeAll('loading');
+    var oDiv = document.getElementById('tips');
+    if (data.code == 1) {
+    oDiv.innerHTML = '<center><div class="tips"><div class="tips-content">&nbsp生成成功：<a href=' + data.anturl + ' target="_blank">' + data.anturl + '</a></div></div></center>';
+    }else{
+    oDiv.innerHTML = '<center><div class="tips"><div class="tips-content">&nbsp生成失败：' + data.msg + '</div></div></center>';
+    }
+    },
+    error: function(e){
+    layer.closeAll('loading');
+    var oDiv = document.getElementById('tips');
+    oDiv.innerHTML = '<center><div class="tips"><div class="tips-content">&nbsp生成失败，API通讯失败</div></div></center>';
+    }
+    });
+    });
+    });
+</script>
 {include file="common/footer"/}

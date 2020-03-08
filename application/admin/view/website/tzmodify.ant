@@ -24,36 +24,36 @@
                     <div class="form-horizontal">
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">是否出站跳转[需要选择]:</label>
+                            <label class="col-sm-2 control-label">是否引导跳转[需要选择]:</label>
 
                             <div class="col-sm-10">
                                 <select id="jump" class="form-control">
                                     {if $is_jump eq 1}
-                                    <option value="1">出站跳转[当前]</option>
+                                    <option value="1">引导跳转[当前]</option>
                                     {else/}
-                                    <option value="0">客户端直链[当前]</option>
+                                    <option value="0">全客户端直链[当前]</option>
                                     {/if}
-                                    <option value="0">客户端直链</option>
-                                    <option value="1">出站跳转</option>
+                                    <option value="0">全客户端直链</option>
+                                    <option value="1">引导跳转</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">安卓微信直接跳转[<font color="red">已失效</font>]:</label>
+<!--                        <div class="form-group">-->
+<!--                            <label class="col-sm-2 control-label">安卓微信直接跳转[<font color="red">已失效</font>]:</label>-->
 
-                            <div class="col-sm-10">
-                                <select id="wxjump" class="form-control">
-                                    {if $is_wxjump eq 1}
-                                    <option value="1">直接跳转[无引导页][当前]</option>
-                                    {else/}
-                                    <option value="0">间接跳转[有引导页][当前]</option>
-                                    {/if}
-                                    <option value="0">间接跳转[有引导页]</option>
-                                    <option value="1">直接跳转[无引导页]</option>
-                                </select>
-                                <small><span class="text-mute">安卓微信用户则直接跳转到浏览器返回后无引导页,仅在跳转模式生效</span></small>
-                            </div>
-                        </div>
+<!--                            <div class="col-sm-10">-->
+<!--                                <select id="wxjump" class="form-control">-->
+<!--                                    {if $is_wxjump eq 1}-->
+<!--                                    <option value="1">直接跳转[无引导页][当前]</option>-->
+<!--                                    {else/}-->
+<!--                                    <option value="0">间接跳转[有引导页][当前]</option>-->
+<!--                                    {/if}-->
+<!--                                    <option value="0">间接跳转[有引导页]</option>-->
+<!--                                    <option value="1">直接跳转[无引导页]</option>-->
+<!--                                </select>-->
+<!--                                <small><span class="text-mute">安卓微信用户则直接跳转到浏览器返回后无引导页,仅在跳转模式生效</span></small>-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <div class="form-group">
                         <label class="col-sm-2 control-label">QQ防举报:</label>
 
@@ -90,6 +90,13 @@
                             <label class="col-sm-2 control-label">跳转网址</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="jumpurl" value="{$jumpurl}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group" >
+                            <label class="col-sm-2 control-label">链接过期时间(天数)</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="expired_time" value="{$expired_time}" />
                             </div>
                         </div>
 <!--                        <div class="form-group">-->
@@ -133,6 +140,7 @@
         is_qqreport: $('#qqreport').val(),
         is_webjump: $('#webjump').val(),
         jumpurl: $('#jumpurl').val(),
+        expired_time: $('#expired_time').val(),
         is_jump: $('#jump').val()
         },
         success: function (data) {

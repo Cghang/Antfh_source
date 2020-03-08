@@ -45,7 +45,7 @@ class Check extends BaseLogic
      */
     public function chkdomain($chkurl,$type,$website){
         try {
-            $Client = (new Client())->request('GET', config('api_antfh') . '/Check?appid='.$website['appid'].'&appkey='.$website['appkey'].'&type='.$type.'&url='.$chkurl)->getBody()->getContents();
+            $Client = (new Client())->request('GET', config('api_antfh') . '/api/urlsec/wx?token='.$website['token'].'&url='.$chkurl)->getBody()->getContents();
             return json_decode($Client,true);
         } catch (GuzzleException $e) {
             return ['code'=>CodeEnum::EXPITION,'msg'=>$e->getMessage()];
