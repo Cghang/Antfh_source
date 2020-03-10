@@ -1,4 +1,15 @@
 {include file="common/header"/}
+<style>
+    .shortbtnz {
+    padding-left: 0px;
+    position: relative;
+    }
+    .no-right {
+    padding-left: 0px;
+    padding-right: 0px;
+    position: relative;
+    }
+</style>
         <section class="under-head-cont main-index-top" style="">
 
             <svg id="wave" viewBox="0 0 100 15" style="position: absolute;bottom: 0;z-index: 0;"><path fill="#fff" opacity="0.5" d="M0 30 V15 Q30 3 60 15 V30z"></path><path fill="#fff" d="M0 30 V12 Q30 17 55 12 T100 11 V30z"></path></svg>
@@ -26,19 +37,25 @@
                         <div class="ajax"></div>
                         <div class="p-relative">
                 <div class="content-right">
-                    <div class="title">生成防红短网址</div>
+                    <div class="title">防红短网址生成</div>
                     <div class="content">
-                        <div class="col-md-2">
+                        <div class="col-md-2 no-right">
                         <select id="type" class="form-control">
                             <option value="1">t.cn [新浪]</option>
                             <option value="3">url.cn [腾讯]</option>
                             <option value="4">w.url.cn [微信]</option>
                         </select>
                         </div>
-                        <div class="col-md-7 shortfieldz">
+                        <div class="col-md-5 no-right">
                             <input type="text" class="form-control main-input" name="keyword" id="url" placeholder="输入域名（需要添加http/https）">
                         </div>
-                        <div class="col-md-3 shortbtnz">	<button class="btn btn-default btn-block main-button" type="submit" id="ajax_key">缩短</button></div>
+                        <div class="col-md-2 no-right">
+                            <select id="jump" class="form-control">
+                                <option value="1">引导跳转</option>
+                                <option value="0">直链防红</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">	<button class="btn btn-default btn-block main-button" type="submit" id="ajax_key">缩短</button></div>
                     </div>
                     <div id="tips"></div>
                 </div>
@@ -91,20 +108,13 @@
 <script type="text/javascript">
     $(document).ready(function(){
     $('#ajax_key').click(function (){
-    if($("#url").val() != ""){
-    var url=document.getElementById("url").value;
-    var reg=/[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/;
-    if(!reg.test(url)){
-    alert("请输入正确域名");
-    return;
-    }
-    }
+    var url = $("#url").val();
     layer.load(1);
     $.ajax({
     url: "/ShortUrl",
     type: "GET",
     dataType: "json",
-    data: "longurl=" + $.trim($("#url").val()) + "&type=" + $("#type").val(),
+    data: "longurl=" + $.trim($("#url").val()) + "&type=" + $("#type").val() + "&jump=" + $("#jump").val(),
     success: function(data){
     layer.closeAll('loading');
     var oDiv = document.getElementById('tips');

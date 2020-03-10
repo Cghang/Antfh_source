@@ -39,12 +39,12 @@ class Jump extends BaseLogic
         }
         $list = $this->logicLddomain->getLddomainRand();
         if(!$list){return ['code'=>CodeEnum::ERROR,'msg'=>'请联系管理员添加落地域名！'];}
-        $fhdomain = $this->logicFhdomain->getFhdomainInfo(['jump_short'=>$ant],'id,tid,out_time');
+        $fhdomain = $this->logicFhdomain->getFhdomainInfo(['jump_short'=>$ant],'id,tid,out_time,is_jump');
         if(!$fhdomain){return ['code'=>CodeEnum::ERROR,'msg'=>'跳转码不存在，请勿非法操作！'];}
         $this->checkUser($fhdomain);
         $this->logicTzdomain->setTzdomainInc(['id'=>$fhdomain['tid']]);//setinc
         $this->logicLddomain->setLddomainInc(['id'=>$list['id']]);
-        return ['code'=>CodeEnum::SUCCESS,'msg'=>'获取落地页成功，正在跳转','jumpurl'=>$list['url'].'/Look.html?fid='.$ant.'_'.$fhdomain['id'].'&_wv=alert%28%27pcqq%27%29'];
+        return ['code'=>CodeEnum::SUCCESS,'msg'=>'获取落地页成功，正在跳转','jumpurl'=>$list['url'].'/Look.html?fid='.$ant.'_'.$fhdomain['id'].'&_wv=alert%28%27pcqq%27%29','is_jump'=>$fhdomain['is_jump']];
     }
 
     public function doJumpend($fid = ''){
@@ -55,11 +55,11 @@ class Jump extends BaseLogic
         $jump_url = explode('_',$fid);
         //if (!session('referrer') || session('referrer') !=  $jump_url['0'])//来源认证
         //{return ['code'=>CodeEnum::ERROR,'msg'=>'请勿非法操作！'];}
-        $fhdomain = $this->logicFhdomain->getFhdomainInfo(['id'=>$jump_url['1']],'id,tid,jump_short,longurl,title,out_time');
+        $fhdomain = $this->logicFhdomain->getFhdomainInfo(['id'=>$jump_url['1']],'id,tid,jump_short,longurl,title,out_time,is_jump');
         $this->checkUser($fhdomain);
         if(!$fhdomain || $fhdomain['jump_short'] != $jump_url['0']){return ['code'=>CodeEnum::ERROR,'msg'=>'跳转码不存在，请勿非法操作！'];}
         $this->logicFhdomain->setFhdomainInc(['id'=>$fhdomain['id']]);//
-        return ['code'=>CodeEnum::SUCCESS,'msg'=>'跳转验证通过，开始匹配客户端','data'=>$fhdomain,'longurl'=>$fhdomain['longurl']];
+        return ['code'=>CodeEnum::SUCCESS,'msg'=>'跳转验证通过，开始匹配客户端','data'=>$fhdomain,'longurl'=>$fhdomain['longurl'],'is_jump'=>$fhdomain['is_jump']];
     }
 
     public function doJumpClient($Client){
@@ -90,7 +90,7 @@ class Jump extends BaseLogic
         }
     }
 
-    public function getJumpCilent($client,$is_jump){
+    public function getJumpCilent($client,$is_jump){//0是直链
         if ($is_jump == 0) {
             switch ($client) {
                 case 1://ios微信
@@ -135,4 +135,10 @@ class Jump extends BaseLogic
         return ['fetch'=>$fetch,'client'=>$client];
     }
 
+    public function getJumpType($is_jump,$sys_jump){
+        if ($is_jump == 2){//跟随系统
+            return $sys_jump;
+        }
+        return $is_jump;
+    }
 }

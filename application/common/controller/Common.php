@@ -11,6 +11,7 @@ namespace app\common\controller;
 use think\App;
 use think\Controller;
 use think\exception\HttpResponseException;
+use think\facade\Request;
 use think\helper\Time;
 use think\Response;
 
@@ -27,7 +28,7 @@ class Common extends Controller
     public function __construct(App $app = null)
     {
         parent::__construct($app);
-       // $this->txprotect();
+        //$this->txprotect();
         $this->website = $this->logicWebsite->getWebsiteInfo(['id'=>1]);//默认值
         $this->assign($this->website);
     }
@@ -171,7 +172,7 @@ class Common extends Controller
             //echo bindec(decbin(ip2long($IpRes)));
             if($RemoteIp == bindec(decbin(ip2long($IpRes))) && !is_array($IpRes))
             {
-            echo bindec(decbin(ip2long($IpRes)));
+           // echo bindec(decbin(ip2long($IpRes)));
                 $this->TxSpdier('欢迎使用！');
             }
             $iprange	=	explode('-', (string)$IpRes);

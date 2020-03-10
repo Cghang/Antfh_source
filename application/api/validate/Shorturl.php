@@ -17,6 +17,7 @@ class Shorturl extends Validate
     protected $rule = [
         'longurl|原网址' => 'require|url',
         'type|缩址类型' => 'in:1,2,3,4',
+        'jump|跳转类型' => 'in:0,1',
     ];
 
 }

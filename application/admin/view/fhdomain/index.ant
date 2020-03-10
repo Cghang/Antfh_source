@@ -109,6 +109,7 @@
                             <th>原链接</th>
                             <th>所属跳转链接</th>
                             <th>访问次数</th>
+                            <th>生成IP</th>
                             <th>链接状态</th>
                             <th>生成时间</th>
                             <th class="text-right" data-sort-ignore="true">操作</th>
@@ -138,6 +139,7 @@
     <td>{{ v.longurl || '--' }}</td>
     <td>{{ v.url }}</td>
     <td>{{ v.visit || '--' }}</td>
+    <td>{{ v.ip || '--' }}</td>
     <td>{{ v.statusName || '--' }}</td>
     <td>{{ v.create_time || '--' }}</td>
     <td class="text-right">

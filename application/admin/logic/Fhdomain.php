@@ -26,7 +26,7 @@ class Fhdomain extends \app\common\logic\Fhdomain
      */
     public function getFhdomainList($where = [], $field = true, $order = 'a.create_time desc', $paginate = 15)
     {
-        $field = 'a.id,a.status,a.title,a.longurl,a.create_time,a.visit,a.shorturl,a.type,b.url';
+        $field = 'a.id,a.status,a.title,a.longurl,a.create_time,a.visit,a.shorturl,a.type,a.ip,b.url';
 
         $this->modelFhdomain->modelalias = 'a';
 

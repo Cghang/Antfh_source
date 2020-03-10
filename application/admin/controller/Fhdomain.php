@@ -90,7 +90,7 @@ class Fhdomain extends BaseAdmin
             return ['code'=>CodeEnum::ERROR,'msg'=>$this->validateFhurl->getError()];
         }
         $this->result(
-            $this->logicFhdomain->fhdomainAdd(['longurl'=>$url,'title'=>$title,'type'=>$type,'out_time'=>strtotime("+1 month"),'uid'=>0,'tzurl'=>$tzurl])
+            $this->logicFhdomain->fhdomainAdd(['longurl'=>$url,'title'=>$title,'type'=>$type,'out_time'=>strtotime("+1 month"),'uid'=>0,'tzurl'=>$tzurl,'jump'=>$this->website['is_jump']])
         );
     }
 

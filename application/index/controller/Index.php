@@ -26,6 +26,13 @@ class Index extends \app\common\controller\Common
     public function __construct(App $app = null)
     {
         parent::__construct($app);
+        $host = Request::host();
+        if (strpos($this->website['weburl'],$host) === false){
+            header("HTTP/1.1 404 Not Found");
+            header("Status: 404 Not Found");
+            echo '404 Not Found';
+            exit;
+        }
     }
 
     /**
@@ -42,16 +49,6 @@ class Index extends \app\common\controller\Common
         return $this->fetch();
     }
 
-    /**
-     * 蚂蚁防红 - 技术合作
-     *
-     * @auth Dany <cgh@tom.com>
-     *
-     * @return mixed
-     */
-    public function com(){
-        return $this->fetch();
-    }
 
     /**
      * 蚂蚁防红 - Api接口
@@ -65,39 +62,6 @@ class Index extends \app\common\controller\Common
     }
 
     public function geetest(){
-        return $this->fetch();
-    }
-
-    /**
-     * 蚂蚁防红 - 帮助文档
-     *
-     * @auth Dany <cgh@tom.com>
-     *
-     * @return mixed
-     */
-    public function help(){
-        return $this->fetch();
-    }
-
-    /**
-     * 蚂蚁防红 - DEMO
-     *
-     * @auth Dany <cgh@tom.com>
-     *
-     * @return mixed
-     */
-    public function demo(){
-        return $this->fetch();
-    }
-
-    /**
-     * 蚂蚁防红 - 源码出售
-     *
-     * @auth Dany <cgh@tom.com>
-     *
-     * @return mixed
-     */
-    public function sell(){
         return $this->fetch();
     }
 

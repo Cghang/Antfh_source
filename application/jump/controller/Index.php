@@ -55,7 +55,7 @@ class Index extends Common
         $jump['code'] == 0?$this->result($jump):null;
         $getclient = $this->logicJump->doJumpClient($UserInfo);
         $client = $getclient['client'];//获取客户端
-        $jump_type = $this->website['is_jump'];
+        $jump_type = $this->logicJump->getJumpType($jump['is_jump'],$this->website['is_jump']);
         $temp = $this->logicJump->getJumpCilent($client,$jump_type);
         if(!in_array($client,[1,2,3,4,5]) && $this->website['is_webjump'] == 1){
             $this->redirect($this->website['jumpurl']);
@@ -84,12 +84,8 @@ class Index extends Common
         $this->assign(['js'=>$js,'aid'=>$jump['data']['jump_short']]);
         $this->assign('jump',$jump['data']);
         $html = $this->fetch($fetch)->getContent();
-        $html = escape($html);
-        $html = str_replace('%',' ',$html);
-        $func = getRandChar(5);
-        $funcin = preg_replace("/\\d+/",'', $jump['data']['jump_short']);
-        return '<script>function '.$func.'('.$funcin.'){document.write((unescape('.$funcin.')));};'.$func.'("'.$html.'".replace(/ /g,"%"));</script>';
-        //return $html;
+        $encode_html = encode_type($this->website['is_encode'],$html,$jump['data']['jump_short']);
+        return $encode_html;
     }
 
 

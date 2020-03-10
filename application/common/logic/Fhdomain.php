@@ -10,6 +10,7 @@ namespace app\common\logic;
 use app\common\library\enum\CodeEnum;
 use app\common\library\ShortCode;
 use think\Db;
+use think\facade\Request;
 use Url\ShortUrl;
 
 class Fhdomain extends BaseLogic
@@ -49,7 +50,7 @@ class Fhdomain extends BaseLogic
                 return ['code' => CodeEnum::ERROR, 'msg' => '请联系管理员添加跳转域名！'];
             }
             if ($check){//存在则重新生成
-                $up = $this->fhdomainUpdate(['id'=>$check['id'],'tzurl'=>$tzdomain['id'],'type'=>$data['type']]);
+                $up = $this->fhdomainUpdate(['id'=>$check['id'],'tzurl'=>$tzdomain['id'],'type'=>$data['type'],'is_jump'=>$data['jump']]);
                 if ($up['code'] == 1){
                     $shorturl = $up['shorturl'];
                 }else{
@@ -63,6 +64,8 @@ class Fhdomain extends BaseLogic
             $tzurl = $tzdomain['url'].'/Url.html?ant='.$jump_short;
             $data['jump_short'] = $jump_short;
             $data['tid'] = $tzdomain['id'];
+            $data['ip'] = Request::ip();
+            $data['is_jump'] = $data['jump'];
             $data['out_time'] = time() + $website['expired_time']*60*60*24;
            // print_r()
             $data['shorturl'] = ShortUrl::short($tzurl,$data['type'],$website['token']);

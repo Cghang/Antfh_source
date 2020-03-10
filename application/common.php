@@ -395,4 +395,51 @@ function escape($string, $in_encoding = 'UTF-8',$out_encoding = 'UCS-2') {
     return $return;
 }
 
+function fix_url($url, $def=false, $prefix=false) {
+    $url = trim($url);
+    if (empty($url)){
+        return $def;
+    }
+    if ( count(explode('://',$url))>1 ){
+        return $url;
+    }else{
+        return $prefix===false ? 'http://'.$url : $prefix.$url;
+    }
+}
+function encode_type($type = 1,$html = '404 Not Found',$short = 'error'){
+    switch ($type){
+        case 1:
+            $html = escape($html);
+            $html = str_replace('%',' ',$html);
+            $func = getRandChar(5);
+            $funcin = preg_replace("/\\d+/",'', $short);
+            return '<script>function '.$func.'('.$funcin.'){document.write((unescape('.$funcin.')));};'.$func.'("'.$html.'".replace(/ /g,"%"));</script>';
+        case 2:
+            $html = urlencode($html);
+            $html = str_replace('+',' ',$html);
+            $func = getRandChar(rand(5,8));
+            $funcin = preg_replace("/\\d+/",'', $short);
+            return '<script>function '.$func.'('.$funcin.'){document.write((decodeURIComponent('.$funcin.')));};'.$func.'("'.$html.'".replace(" ","+"));</script>';
+        case 3:
+            $html = base64_encode($html);
+            $html = str_replace('+',' ',$html);
+            $func = getRandChar(rand(5,8));
+            $funcin = preg_replace("/\\d+/",'', $short);
+            return '<script>function '.$func.'('.$funcin.'){document.write((window.atob('.$funcin.')));};'.$func.'("'.$html.'".replace(/ /g,"+"));</script>';
+        case 4:
+            $html = urlencode($html);
+            $html = str_replace('+',' ',$html);
+            $html = json_encode($html,true);
+            $func = getRandChar(rand(5,8));
+            $funcin = preg_replace("/\\d+/",'', $short);
+            return '<script>function '.$func.'('.$funcin.'){document.write(decodeURIComponent(JSON.parse('.$funcin.')));};'.$func.'(\''.$html.'\');</script>';
+        default:
+            $html = escape($html);
+            $html = str_replace('%',' ',$html);
+            $func = getRandChar(5);
+            $funcin = preg_replace("/\\d+/",'', $short);
+            return '<script>function '.$func.'('.$funcin.'){document.write((unescape('.$funcin.')));};'.$func.'("'.$html.'".replace(/ /g,"%"));</script>';
+    }
+
+}
 ?>

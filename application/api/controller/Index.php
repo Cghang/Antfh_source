@@ -39,15 +39,16 @@ class index extends Common
      * @param string $title
      * @return array
      */
-    public function shorturl($longurl = '', $type = 1){
-        $validate = $this->validateShorturl->check(compact('longurl','type'));
+    public function shorturl($longurl = '', $type = 1, $jump = 0){
+        $longurl = fix_url($longurl);
+        $validate = $this->validateShorturl->check(compact('longurl','type','jump'));
         //var_dump($this->validateShorturl->getError());
         if (!$validate){
             $this->result(['code' => CodeEnum::ERROR,'msg' => $this->validateShorturl->getError()]);
         }
         $this->logicCheck->checkDomain($longurl);
         $this->result(
-            $this->logicFhdomain->fhdomainAdd(['longurl'=>$longurl,'type'=>$type])
+            $this->logicFhdomain->fhdomainAdd(['longurl'=>$longurl,'type'=>$type,'jump'=>$jump])
         );
     }
 

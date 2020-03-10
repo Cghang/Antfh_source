@@ -56,10 +56,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">网址URL</label>
+                            <label class="col-sm-2 control-label"><font color="red">网址URL</font></label>
 
                             <div class="col-sm-10">
-                                <input type="text" id="weburl" placeholder="网站url" value="{$weburl}" class="form-control">
+                                <input type="text" id="weburl" placeholder="网站url" value="{$weburl}" class="form-control"> <small><span class="text-mute">只有这个域名能够访问首页,其他域名则返回404</span></small>
+
                             </div>
                         </div>
 
